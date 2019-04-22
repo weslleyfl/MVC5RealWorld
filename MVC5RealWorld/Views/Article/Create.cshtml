@@ -1,0 +1,136 @@
+﻿@model MVC5RealWorld.Models.DB.Article
+
+@{
+    ViewData["Title"] = "Creates";
+}
+
+<h1>Create</h1>
+
+<h4>Article</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+
+        @*@using (@Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+
+                    <legend>Autores</legend>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Title)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Title)
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.CreateDate)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.CreateDate)
+                        @Html.ValidationMessageFor(model => model.CreateDate)
+                    </div>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Description)
+                    </div>
+
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Description)
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Price)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Price)
+                        @Html.ValidationMessageFor(model => model.Price)
+                    </div>
+
+                    <p>
+                        <input type="submit" value="Create" />
+                    </p>
+
+
+                </fieldset>
+
+            }*@
+
+        <p />
+
+        <form asp-action="Create" method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" placeholder="Titulo" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" type="email" placeholder="Email address" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfAuthors" class="control-label"></label>
+                <input asp-for="NumberOfAuthors" class="form-control" />
+                <span asp-validation-for="NumberOfAuthors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" asp-for-invariant="true" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Editora" class="control-label"></label>
+                <input asp-for="Editora" class="form-control" />
+                <span asp-validation-for="Editora" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input id="demo1" type="text" value="55" name="demo1">
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+@*<div class="row">
+        <div class="col-md-4">
+            <partial name="_thePartialView.cshtml" />
+        </div>
+    </div>*@
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

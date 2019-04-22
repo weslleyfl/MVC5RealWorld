@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using MVC5RealWorld.Models.DB;
 using MVC5RealWorld.Models.EntityManager;
 using MVC5RealWorld.Models.ViewModel;
+using MVC5RealWorld.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,8 +42,11 @@ namespace MVC5RealWorld.Controllers
 
             return RedirectToAction("Welcome", "Home");
 
+        }
 
-
+        public IActionResult SignUpNome(string nome)
+        {
+            return View();
         }
 
         private void AuthenticationClaim(string loginName, string firstName)
@@ -49,8 +54,8 @@ namespace MVC5RealWorld.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, loginName),
-                new Claim("FullName", firstName),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim("FullName", firstName)
+                //new Claim(ClaimTypes.Role, "Member")
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -92,12 +97,16 @@ namespace MVC5RealWorld.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        public ActionResult LogIn()
+        [AllowAnonymous]
+        public ActionResult LogIn(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult LogIn(UserLoginView ULV, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -114,7 +123,9 @@ namespace MVC5RealWorld.Controllers
                     if (ULV.Password.Equals(password))
                     {
                         AuthenticationClaim(ULV.LoginName, "Weslley");
-                        return RedirectToAction("Welcome", "Home");
+                        //return RedirectToAction("Welcome", "Home");
+                        
+                        return Redirect(returnUrl ?? Url.Action("Welcome", "Home")); //"Home/Welcome");
                     }
                     else
                     {
@@ -140,5 +151,18 @@ namespace MVC5RealWorld.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+
+        //public ActionResult Index()
+        //{
+        //    EmailLembreteSenha model = new EmailLembreteSenha();
+        //    model.UsuarioNome = "Eduardo Coutinho";
+        //    model.UsuarioSenha = "123";
+        //    model.DataSolicitacao = DateTime.Now;
+
+
+
+        //    //string viewCode = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Views/TemplateEmailLembreteSenha.cshtml"));
+
+        //}
     }
 }

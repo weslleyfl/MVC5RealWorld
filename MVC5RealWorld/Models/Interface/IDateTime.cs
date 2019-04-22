@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVC5RealWorld.Models.ViewModel
+namespace MVC5RealWorld.Models.Interface
 {
-    public class UserModel
+    public interface IDateTime
     {
-        public string Nome { get; set; }
+        DateTime Now { get; }
     }
 }

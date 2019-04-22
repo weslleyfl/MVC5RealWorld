@@ -9,7 +9,7 @@ namespace MVC5RealWorld.Models.EntityManager
 {
     public class UserManager
     {
-        
+
         public void AddUserAccount(UserSignUpView user)
         {
             using (DemoDBContext db = new DemoDBContext())
@@ -78,5 +78,31 @@ namespace MVC5RealWorld.Models.EntityManager
             }
         }
 
+        public bool IsUserInRole(string loginName, string roleName)
+        {
+            if (string.IsNullOrEmpty(loginName)) return false;
+
+            using (DemoDBContext db = new DemoDBContext())
+            {
+                SYSUser SU = db.SYSUsers.Where(u => u.LoginName.ToLower().Equals(loginName))?.FirstOrDefault();
+
+                if (SU != null)
+                {
+                    var roles = from q in db.SYSUserRoles
+                                join r in db.LookupRoles on q.LOOKUPRoleID equals r.LookuproleId
+                                where r.RoleName.Equals(roleName) && q.SYSUserID.Equals(SU.SYSUserID)
+                                select r.RoleName;
+
+                    if (roles != null)
+                    {
+                        return roles.Any();
+                    }
+                }
+            }
+
+            return false;
+
+        }
     }
+
 }

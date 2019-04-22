@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVC5RealWorld.Models.ViewModel
+namespace MVC5RealWorld.Util
 {
-    public class UserModel
+    public interface IPathProvider
     {
-        public string Nome { get; set; }
+        string MapPath(string path);
     }
 }

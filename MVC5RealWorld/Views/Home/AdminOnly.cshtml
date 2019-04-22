@@ -1,0 +1,25 @@
+﻿@model UserModel
+
+@{
+    ViewData["Title"] = "AdminOnly";
+}
+
+<h1>AdminOnly</h1>
+
+<h2>Unauthorized Access!</h2>
+<p>Oops! You don't have permission to access this page.</p>
+
+<div>
+    <a asp-action="Welcome" asp-controller="Home" class="btn-link">Voltar para pagina Welcome</a>
+</div>
+
+<form action="Index" method="post">
+    <div class="form-group">
+        <label asp-for="Nome" class="control-label"></label>
+        <input asp-for="Nome" class="custom-control-label" />
+    </div>
+    <div class="form-group">
+        <button>Enviar</button>
+    </div>
+</form>
+

@@ -11,7 +11,7 @@ namespace MVC5RealWorld.Models.ViewModel
         [Key]
         public int SYSUserID { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Campo obrigatorio")]
         [Display(Name = "Login ID")]
         public string LoginName { get; set; }
 

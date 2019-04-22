@@ -1,0 +1,20 @@
+﻿@model MVC5RealWorld.Models.DB.EmailLembreteSenha
+
+@{
+    ViewData["Title"] = "TemplateEmailLembreteSenha";
+}
+
+<h1>TemplateEmailLembreteSenha</h1>
+
+<p>Prezado(a) @Model.UsuarioNome,</p>
+<br /><br />
+
+<p>Atendendo &agrave; sua solicita&ccedil;&atilde;o realizada em: @Model.DataSolicitacao.ToShortDateString(), estamos enviando sua senha de acesso</p>
+<p>Senha: @Model.UsuarioSenha</p>
+<br /><br />
+
+<p>
+    Atenciosamente,<br />
+    administrador
+</p>
+

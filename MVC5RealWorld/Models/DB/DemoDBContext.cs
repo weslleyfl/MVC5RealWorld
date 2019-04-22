@@ -23,6 +23,8 @@ namespace MVC5RealWorld.Models.DB
         public virtual DbSet<SYSUserProfile> SYSUserProfiles { get; set; }
         public virtual DbSet<SYSUserRole> SYSUserRoles { get; set; }
 
+        public virtual DbSet<Article> Articles { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

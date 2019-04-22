@@ -11,16 +11,17 @@
 <div class="row">
     <div class="col-md-4">
 
-        <form asp-action="LogIn">
+        <form asp-action="LogIn" method="post" asp-route-returnurl="@ViewBag.ReturnUrl">
 
             @Html.AntiForgeryToken()
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="LoginName" class="control-label"></label>
+                <label asp-for="LoginName" class="control-label">Nome do Usuario</label>
                 <input asp-for="LoginName" class="form-control" />
                 <span asp-validation-for="LoginName" class="text-danger"></span>
+                @*@Html.ValidationMessageFor(O => O.LoginName, "", new { @class = "text-danger" })*@
             </div>
 
             <div class="form-group">
@@ -34,6 +35,15 @@
         </form>
 
     </div>
+
+    <div class="col-md-4">
+
+        <form asp-route="login"
+              asp-route-returnurl="@ViewBag.ReturnUrl"
+              method="post"></form>
+
+    </div>
+
 </div>
 
 <div>
