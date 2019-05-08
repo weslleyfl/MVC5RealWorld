@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Security.Application;
 using MVC5RealWorld.Models.DB;
 using MVC5RealWorld.Models.EntityManager;
 using MVC5RealWorld.Models.ViewModel;
@@ -51,13 +52,16 @@ namespace MVC5RealWorld.Controllers
 
         private void AuthenticationClaim(string loginName, string firstName)
         {
+            // Criando uma identidade para o usuário
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, loginName),
-                new Claim("FullName", firstName)
-                //new Claim(ClaimTypes.Role, "Member")
+                new Claim(ClaimTypes.NameIdentifier, firstName),
+                new Claim("FullName", firstName),
+                new Claim(ClaimTypes.Role, "Member")
             };
 
+            // Criando uma Identidade e associando-a ao ambiente.
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             var authProperties = new AuthenticationProperties
@@ -88,6 +92,10 @@ namespace MVC5RealWorld.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
+
+            // associando-a ao ambiente. - ClaimsPrincipal
+            System.Threading.Thread.CurrentPrincipal = HttpContext.User;
+
         }
 
         [HttpPost]
@@ -104,16 +112,18 @@ namespace MVC5RealWorld.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost()]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult LogIn(UserLoginView ULV, string returnUrl)
         {
+            
             if (ModelState.IsValid)
             {
                 UserManager UM = new UserManager();
-                string password = UM.GetUserPassword(ULV.LoginName);
+                string password = UM.GetUserPassword(Encoder.HtmlEncode(ULV.LoginName));
 
+                // if ((string.IsNullOrEmpty(password)) || (!ULV.Password.Equals(password)))
                 if (string.IsNullOrEmpty(password))
                 {
                     ModelState.AddModelError("", "The user login or password provided is incorrect.");
@@ -122,9 +132,13 @@ namespace MVC5RealWorld.Controllers
                 {
                     if (ULV.Password.Equals(password))
                     {
-                        AuthenticationClaim(ULV.LoginName, "Weslley");
+
+                        // Forms authentication
+                        // FormsAuthentication.SetAuthCookie(uname, false);
+
+                        AuthenticationClaim(ULV.LoginName, ULV.LoginName);
                         //return RedirectToAction("Welcome", "Home");
-                        
+
                         return Redirect(returnUrl ?? Url.Action("Welcome", "Home")); //"Home/Welcome");
                     }
                     else

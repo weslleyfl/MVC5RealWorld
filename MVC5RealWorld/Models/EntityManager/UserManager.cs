@@ -70,7 +70,7 @@ namespace MVC5RealWorld.Models.EntityManager
             using (DemoDBContext db = new DemoDBContext())
             {
                 var user = db.SYSUsers.Where(o => o.LoginName.ToLower().Equals(loginName));
-
+                
                 if (user.Any())
                     return user.FirstOrDefault().PasswordEncryptedText;
                 else
@@ -102,6 +102,33 @@ namespace MVC5RealWorld.Models.EntityManager
 
             return false;
 
+        }
+
+        public List<LOOKUPAvailableRole> GetAllRoles()
+        {
+            using (DemoDBContext db = new DemoDBContext())
+            {
+                var roles = db.LookupRoles.Select(o => new LOOKUPAvailableRole
+                {
+                    LOOKUPRoleID = o.LookuproleId,
+                    RoleName = o.RoleName,
+                    RoleDescription = o.RoleDescription
+                }).ToList();
+
+                return roles;
+            }
+        }
+
+        public int GetUserID(string loginName)
+        {
+            using (DemoDBContext db = new DemoDBContext())
+            {
+                var user = db.SYSUsers.Where(o => o.LoginName.Equals(loginName));
+
+                if (user.Any())
+                    return user.FirstOrDefault().SYSUserID;
+            }
+            return 0;
         }
     }
 

@@ -11,6 +11,7 @@ namespace MVC5RealWorld.Models.ViewModel
         [Key]
         public int SYSUserID { get; set; }
 
+        [RegularExpression(@"^[^\<\>]*$", ErrorMessage = "May not contain <,>")]
         [Required(ErrorMessage = "Campo obrigatorio")]
         [Display(Name = "Login ID")]
         public string LoginName { get; set; }

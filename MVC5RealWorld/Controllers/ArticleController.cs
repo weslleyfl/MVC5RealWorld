@@ -113,7 +113,7 @@ namespace MVC5RealWorld.Controllers
             }
         }
         
-        // [NonAction]
+        // [NonAction]               
         public JsonResult IsUserAvailable(string title)
         {
             string username = title;
@@ -138,6 +138,8 @@ namespace MVC5RealWorld.Controllers
             }
             return Json(suggestedUID);
         }
+        
+        
     }
 
 }

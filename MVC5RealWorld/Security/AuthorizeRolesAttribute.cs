@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
 using MVC5RealWorld.Models.DB;
 using MVC5RealWorld.Models.EntityManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace MVC5RealWorld.Security
@@ -60,9 +62,68 @@ namespace MVC5RealWorld.Security
 
         }
     }
-    
+
+
+    public class CustomPrincipal : System.Security.Principal.IPrincipal
+    {
+        public CustomPrincipal(CustomIdentity identity)
+        {
+            this.Identity = identity;
+        }
+        public IIdentity Identity { get; private set; }
+
+        IIdentity IPrincipal.Identity => throw new NotImplementedException();
+
+        public bool IsInRole(string role)
+        {
+            return true;
+        }
+    }
+
+    public class CustomIdentity : IIdentity
+    {
+        public CustomIdentity(string name)
+        {
+            this.Name = name;
+        }
+
+        public string AuthenticationType
+        {
+            get { return "Custom"; }
+        }
+        public bool IsAuthenticated
+        {
+            get { return !string.IsNullOrEmpty(this.Name); }
+        }
+        public string Name { get; private set; }
+    }
+
 
     #region " Codigo anteriro ao .core "
+
+    /*
+ public class CustomAuthorizeAttribute : AuthorizeAttribute, IAsyncAuthorizationFilter
+{
+    public async Task OnAuthorizationAsync(AuthorizationFilterContext authorizationFilterContext)
+    {
+        var policyProvider = authorizationFilterContext.HttpContext
+            .RequestServices.GetService<IAuthorizationPolicyProvider>();
+        var policy = await policyProvider.GetPolicyAsync(UserPolicy.Read);
+        var requirement = (ClaimsAuthorizationRequirement)policy.Requirements
+            .First(r => r.GetType() == typeof(ClaimsAuthorizationRequirement));
+
+        if (authorizationFilterContext.HttpContext.User.Identity.IsAuthenticated)
+        {
+            if (!authorizationFilterContext.HttpContext
+              .User.HasClaim(x => x.Value == requirement.ClaimType))
+            {
+                authorizationFilterContext.Result =
+                   new ObjectResult(new ApiResponse(HttpStatusCode.Unauthorized));
+            }
+        }
+    }
+}
+ */
 
     public class AuthorizeRolesAttribute : AuthorizeAttribute //IAuthorizationHandler //AuthorizeAttribute
     {

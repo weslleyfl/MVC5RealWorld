@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MVC5RealWorld.Models.DB
 {
-    public partial class SYSUser
+    public partial class SYSUser 
     {
         public SYSUser()
         {
@@ -21,5 +21,7 @@ namespace MVC5RealWorld.Models.DB
 
         public virtual ICollection<SYSUserProfile> SysuserProfile { get; set; }
         public virtual ICollection<SYSUserRole> SysuserRole { get; set; }
+
+        
     }
 }
