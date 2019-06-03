@@ -5,6 +5,7 @@
 }
 
 <div class="text-center">
+    
     <span>Welcome!</span>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <br />
@@ -24,12 +25,14 @@
             { "speakerId", "11" },
             { "currentYear", "true" }
         };
+        
     }
 
     @if (@Model?.Nome != null)
     {
         <br />
         <a asp-action="SignUpNome" asp-controller="Account" asp-route-nome="@Model.Nome">Nome : @Model.Nome</a>
+        
         <br />
 
         <div class="form-group">

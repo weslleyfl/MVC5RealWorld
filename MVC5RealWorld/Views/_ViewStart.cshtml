@@ -1,4 +1,36 @@
 ﻿@{
     Layout = "_Layout";
+        
+    //Layout = "_PlainLayout.cshtml";
+
+    @*@if (ViewBag.Switch = "Layout1")
+        {
+            Layout = "_Layout.cshtml";
+        }
+        else
+        {
+            Layout = "_PlainLayout.cshtml";
+        }*@
+
+
+
 }
+
+
+@*@{
+        var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+        if (controller == "Home")
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_UserLayout.cshtml";
+        }
+
+        @{
+            Layout = Request.Browser.IsMobileDevice ? "~/Views/Shared/_LayoutMobile.cshtml"
+                                                    : "~/Views/Shared/_Layout.cshtml";
+        }
+    }*@
 

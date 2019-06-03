@@ -48,4 +48,5 @@ namespace MVC5RealWorld.Util.ActionAtribute
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
     }
+
 }

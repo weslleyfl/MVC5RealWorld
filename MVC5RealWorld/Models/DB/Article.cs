@@ -8,21 +8,22 @@ using System.Threading.Tasks;
 
 namespace MVC5RealWorld.Models.DB
 {
+    
     public class Article
     {
         
         public int ID { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [StringLength(50, MinimumLength = 5)]
-        [Remote("IsUserAvailable", "Article", ErrorMessage = "Titulo ja existe")]
+        [Remote("IsUserAvailable", "Article", ErrorMessage = "Titulo ja existe")]        
         public string Titulo { get; set; }
                 
         [RegularExpression("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Range(1, 3000)]
+        [Range(1, 10)]
         [Display(Name = "Numero de Autores")]
         public int NumberOfAuthors { get; set; }
 
@@ -41,5 +42,18 @@ namespace MVC5RealWorld.Models.DB
         [Display(Name = "NomeCampo", ResourceType = typeof(ResourceTeste))]
         [Required(AllowEmptyStrings = false, ErrorMessageResourceName = "ErroMensagem", ErrorMessageResourceType = typeof(ResourceTeste))]
         public string Editora { get; set; }
+
+
+        [Required(ErrorMessage = "The Password field is required.")]
+        [StringLength(8, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
     }
 }

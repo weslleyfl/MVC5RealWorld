@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MVC5RealWorld.Util
 {
@@ -20,6 +16,8 @@ namespace MVC5RealWorld.Util
 
         public InvariantDecimalTagHelper(IHtmlGenerator generator) : base(generator)
         {
+                       
+
             _generator = generator;
         }
 
@@ -34,8 +32,6 @@ namespace MVC5RealWorld.Util
             }
 
             base.Process(context, output);
-
-
         }
     }
 }

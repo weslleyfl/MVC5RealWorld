@@ -17,6 +17,7 @@ namespace MVC5RealWorld.Util.ActionAtribute
             Debug.WriteLine($" ERROR DO OnExceptionAsync -  { exception?.Message ?? "Erro no exception igual a NULL " }");
 
             context.ExceptionHandled = false; //optional 
+            
         }
        
     }

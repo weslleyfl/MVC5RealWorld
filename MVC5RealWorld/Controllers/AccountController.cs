@@ -2,29 +2,33 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
+//using Microsoft.Extensions.Hosting;
 using Microsoft.Security.Application;
-using MVC5RealWorld.Models.DB;
+//using MVC5RealWorld.Models.DB;
 using MVC5RealWorld.Models.EntityManager;
 using MVC5RealWorld.Models.ViewModel;
-using MVC5RealWorld.Util;
+//using MVC5RealWorld.Util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
+using System.Threading;
+//using System.Threading.Tasks;
 
 namespace MVC5RealWorld.Controllers
 {
     public class AccountController : Controller
     {
 
+        [AllowAnonymous]
         public IActionResult SignUp()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public IActionResult SignUp(UserSignUpView USV)
         {
             if (!ModelState.IsValid) return View();
@@ -41,6 +45,8 @@ namespace MVC5RealWorld.Controllers
 
             AuthenticationClaim(USV.LoginName, USV.FirstName);
 
+            var nome = ((System.Security.Principal.IPrincipal)Thread.CurrentPrincipal).Identity.Name;
+
             return RedirectToAction("Welcome", "Home");
 
         }
@@ -52,13 +58,16 @@ namespace MVC5RealWorld.Controllers
 
         private void AuthenticationClaim(string loginName, string firstName)
         {
+                        
+
             // Criando uma identidade para o usuário
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, loginName),
                 new Claim(ClaimTypes.NameIdentifier, firstName),
                 new Claim("FullName", firstName),
-                new Claim(ClaimTypes.Role, "Member")
+                new Claim(ClaimTypes.Role, "Member")                
+
             };
 
             // Criando uma Identidade e associando-a ao ambiente.
@@ -117,7 +126,8 @@ namespace MVC5RealWorld.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogIn(UserLoginView ULV, string returnUrl)
         {
-            
+                     
+
             if (ModelState.IsValid)
             {
                 UserManager UM = new UserManager();

@@ -61,6 +61,15 @@ namespace MVC5RealWorld.Util.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sobre o titulo.
+        /// </summary>
+        public static string AboutTitle {
+            get {
+                return ResourceManager.GetString("AboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Campo propriedade obrigatorio.
         /// </summary>
         public static string ErroMensagem {

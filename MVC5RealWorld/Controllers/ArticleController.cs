@@ -27,6 +27,7 @@ namespace MVC5RealWorld.Controllers
 
         // GET: Article
         
+
         public ActionResult Index()
         {
             // var caminho = _pathProvider.MapPath("/Data/Data.txt");        
@@ -35,7 +36,7 @@ namespace MVC5RealWorld.Controllers
             return View();
         }
 
-        // GET: Article/Details/5
+        // GET: Article/Details/5       
         public ActionResult Details(int id)
         {
             return View();
@@ -52,7 +53,7 @@ namespace MVC5RealWorld.Controllers
         // POST: Article/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [System.Web.Mvc.ValidateInput(true)]
+        //[System.Web.Mvc.ValidateInput(true)]
         public ActionResult Create(Article collection)
         {
             try
@@ -137,6 +138,11 @@ namespace MVC5RealWorld.Controllers
                 }
             }
             return Json(suggestedUID);
+        }
+        
+        public ActionResult List(int param1, int param2, int param3)
+        {
+            return Content($"Deu certo {param1} {param2} {param3}");
         }
         
         

@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
     <div>
-        
+        @RenderBody()
     </div>
     <div>
-        @RenderBody()
+        PhoneNumber: <input id="phoneNumber" name="phoneNumber" size="10" type="text" value="3125551212" aria-required="true" /><br />
+        
+
     </div>
 </body>
 </html>

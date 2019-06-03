@@ -20,6 +20,11 @@ namespace MVC5RealWorld.Util.ActionAtribute
         {
             context.HttpContext.Response.Headers.Add(_name, new string[] { _value });
 
+            //if (!context.ModelState.IsValid)
+            //{
+            //    context.Result = new Microsoft.AspNetCore.Mvc.BadRequestObjectResult(modelState: context.ModelState);
+            //}
+
             base.OnResultExecuting(context);
         }
     }

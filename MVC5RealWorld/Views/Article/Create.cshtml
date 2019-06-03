@@ -6,6 +6,7 @@
 
 <h1>Create</h1>
 
+
 <h4>Article</h4>
 <hr />
 <div class="row">
@@ -13,53 +14,86 @@
 
 
         @*@using (@Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+
+                <legend>Autores</legend>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Title)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CreateDate)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.CreateDate)
+                    @Html.ValidationMessageFor(model => model.CreateDate)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Description)
+                </div>
+
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Description)
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Price)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Price)
+                    @Html.ValidationMessageFor(model => model.Price)
+                </div>
+
+                <p>
+                    <input type="submit" value="Create" />
+                </p>
+
+
+            </fieldset>
+
+        }*@
+
+        <p />
+
+        @*<reverse-text-div all-caps="true" class="badge" div-data="MIM ROP ADAZIMOTSUC REPLEH GAT AMU ED OACAIRC">
+        </reverse-text-div>*@
+        
+        <div-reverso all-caps="false" class="badge" div-data="miM roP ADAZIMOTSUC REPLEH GAT AMU ED OACAIRC" ></div-reverso>
+
+        @section Footer
             {
-                @Html.ValidationSummary(true)
+            <p>Section/Index page</p>
+            <h1>weslley lopes</h1>
 
-                <fieldset>
+        }        
 
-                    <legend>Autores</legend>
 
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.Title)
+        <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload one or more files using this form:</p>
+                    <input type="file" name="files" multiple>                  
+                    <div class="form-group">
+                        <input asp-for="Editora" class="form-control" placeholder="editora" role="textbox" />
                     </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.Title)
-                        @Html.ValidationMessageFor(model => model.Title)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.CreateDate)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.CreateDate)
-                        @Html.ValidationMessageFor(model => model.CreateDate)
-                    </div>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.Description)
-                    </div>
-
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.Description)
-                        @Html.ValidationMessageFor(model => model.Description)
-                    </div>
-
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.Price)
-                    </div>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.Price)
-                        @Html.ValidationMessageFor(model => model.Price)
-                    </div>
-
-                    <p>
-                        <input type="submit" value="Create" />
-                    </p>
-
-
-                </fieldset>
-
-            }*@
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload">
+                </div>
+            </div>
+        </form>
 
         <p />
 
@@ -71,7 +105,7 @@
 
             <div class="form-group">
                 <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" placeholder="Titulo" />
+                <input asp-for="Titulo" class="form-control" placeholder="Titulo" aria-required="true" role="textbox" />
                 <span asp-validation-for="Titulo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -110,21 +144,22 @@
                 <input id="demo1" type="text" value="55" name="demo1">
             </div>
 
-
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
 
+        
+
     </div>
 </div>
 
 
-@*<div class="row">
-        <div class="col-md-4">
-            <partial name="_thePartialView.cshtml" />
-        </div>
-    </div>*@
+<div class="row">
+    <div class="col-md-4">
+        <partial name="_thePartialView.cshtml" />
+    </div>
+</div>
 
 
 <div>

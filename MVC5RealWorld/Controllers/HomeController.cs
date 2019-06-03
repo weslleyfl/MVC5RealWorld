@@ -2,18 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.Security.Application;
+//using Microsoft.Security.Application;
 using MVC5RealWorld.Models;
-using MVC5RealWorld.Models.EntityManager.Extensions;
+//using MVC5RealWorld.Models.EntityManager.Extensions;
 using MVC5RealWorld.Models.Interface;
 using MVC5RealWorld.Models.ViewModel;
 using MVC5RealWorld.Util;
 using MVC5RealWorld.Util.ActionAtribute;
 using System;
-using System.Collections.Generic;
+///using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+///using System.Linq;
+///using System.Threading.Tasks;
 
 
 namespace MVC5RealWorld.Controllers
@@ -42,11 +42,13 @@ namespace MVC5RealWorld.Controllers
             _appSettings = appSettings.Value;
         }
 
+
+        
         [AddHeader(name: "Autor", value: "WEslley Fernando Lopes")]
         //[ErrorHandlingFilter()]
         //[ApiExceptionFilter()]
         public IActionResult Index()
-        {
+        {            
             
             var serverTime = _dateTime.Now;
 
@@ -129,7 +131,7 @@ namespace MVC5RealWorld.Controllers
         //[Authorize()]
         //[Authorize(Policy = "AcessoUserPolicy", Roles = "Admin")]
         //[Authorize(Roles = "Member")]
-        [Authorize(Policy = "AcessoUserPolicy")]
+        //[Authorize(Policy = "AcessoUserPolicy")]
         public ActionResult Welcome()
         {
             return View();
@@ -140,5 +142,7 @@ namespace MVC5RealWorld.Controllers
         {
             return View();
         }
+
+
     }
 }
